@@ -41,6 +41,7 @@ public class VideoConvert {
         video.setFrameRate(new Integer(15));
         video.setSize(new VideoSize(640, 480));
 
+
         EncodingAttributes attrs = new EncodingAttributes();
         attrs.setFormat("mp4");
         attrs.setAudioAttributes(audio);
