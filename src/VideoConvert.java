@@ -79,8 +79,6 @@ public class VideoConvert {
         convert.add("-y"); // 添加参数＂-y＂，该参数指定将覆盖已存在的文件
         convert.add(codcFilePath);
 
-
-
         // 创建一个List集合来保存从视频中截取图片的命令
         List<String> cutpic = new ArrayList<String>();
         cutpic.add(ffmpegPath);
