@@ -11,5 +11,6 @@
     <orderEntry type="library" name="dom4j-1.6.1" level="project" />
     <orderEntry type="library" name="xstream-1.4.7" level="project" />
     <orderEntry type="library" name="jave-1.0.2" level="project" />
+    <orderEntry type="library" name="jsoup-1.8.3" level="project" />
   </component>
 </module>
