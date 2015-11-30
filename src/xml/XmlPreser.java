@@ -5,9 +5,17 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 import java.lang.reflect.*;
 import java.util.*;
 
@@ -16,10 +24,41 @@ import java.util.*;
  */
 public class XmlPreser {
     public static void main(String[] args){
-        readXml("D:\\fs\\out\\artifacts\\fs_war_exploded\\data\\1\\21304f2f-e004-49f0-ae98-dbc3ed7cfef8\\imsmanifest.xml");
+       // readXml("D:\\fs\\out\\artifacts\\fs_war_exploded\\data\\1\\21304f2f-e004-49f0-ae98-dbc3ed7cfef8\\imsmanifest.xml");
+        showContent("你好！你有一份调查问卷《1212》需要参与，点击<a href='/zh-CN/Survey/MySurvey/WriteSurvey?keep=1&id=12'>进入</a>参与！");
     }
+    private static void showContent(String content) {
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        InputSource inStream = null;
+        try {
+            StringReader read = new StringReader(content);
+            inStream = new InputSource(read);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            org.w3c.dom.Document dom = null;
+            try {
+                dom = builder.parse(inStream);
+            } catch (SAXException e) {
+
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            NodeList P_Items = dom.getElementsByTagName("p");
+
+            NodeList IMG_Items = dom.getElementsByTagName("img");
+
+            } catch (ParserConfigurationException e1) {
+            e1.printStackTrace();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+    }
+
     public static void readXml(String xmlFileName){
         SAXReader saxReader = new SAXReader();
+
         try {
             Document document=saxReader.read(new File(xmlFileName));
             Element element=document.getRootElement();

@@ -9,7 +9,25 @@ public class test {
         testLinkedlist();*/
        // testMap();
         //testSet();
-        testArrayList();
+        //testArrayList();
+        //testReplace();
+        ChangeUrl();
+
+    }
+
+    private static void testReplace(){
+
+        String s="##"+"\u002A"+"\u002A"+"##";
+        String re="we"+s+"e";
+
+        String[] ss=re.split(s);
+        System.out.print(s);
+
+    }
+    private static void ChangeUrl(){
+        String url="http://cshj.anpeiwang.com/ELN/Mobile/GetCourseCategorys.action?tid=1";
+        url=url.replace("?",".action?");
+        System.out.print(url);
     }
     private static void testSet(){
         Set s=new TreeSet();
