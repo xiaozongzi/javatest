@@ -11,10 +11,17 @@ public class test {
         //testSet();
         //testArrayList();
         //testReplace();
-        ChangeUrl();
-
+        //ChangeUrl();
+        System.out.println(getString());
     }
-
+    private static String getString(){
+        int type=1;
+        switch (type){
+            case 1:
+                return "1111";
+        }
+        return null;
+    }
     private static void testReplace(){
 
         String s="##"+"\u002A"+"\u002A"+"##";
