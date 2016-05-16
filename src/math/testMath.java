@@ -1,27 +1,34 @@
 package math;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * Created by ${zhangzz} on 2016/5/13.
  */
 public class testMath {
-    private static double test=-0.5000;
+    private static double test=0.51600;
     public static void main(String[] args) {
     /*    ring();
         round();
         floor();
         ceil();*/
 //        Rint();
-        testBig();
+//        testBig();
+        testNumFormat();
     }
+
+    private static void testNumFormat() {
+        NumberFormat format=NumberFormat.getCurrencyInstance(Locale.CHINA);
+        System.out.println(format.format(test));
+    }
+
     public static final void testBig(){
         BigDecimal bigDecimal=new BigDecimal(0.2+"");
 //        System.out.println(bigDecimal.abs());//绝对值
 //        System.out.println(bigDecimal.movePointLeft(2));//向左移动2为的数
 //        System.out.println(bigDecimal.movePointRight(2));//向右移动2为的小数
-        System.out.println(bigDecimal.negate());//向右移动2为的小数
-
 
     }
     /**
