@@ -6,15 +6,24 @@ import java.math.BigDecimal;
  * Created by ${zhangzz} on 2016/5/13.
  */
 public class testMath {
-    private static double test=0.531;
+    private static double test=-0.5000;
     public static void main(String[] args) {
     /*    ring();
         round();
         floor();
         ceil();*/
-        Rint();
+//        Rint();
+        testBig();
     }
+    public static final void testBig(){
+        BigDecimal bigDecimal=new BigDecimal(0.2+"");
+//        System.out.println(bigDecimal.abs());//绝对值
+//        System.out.println(bigDecimal.movePointLeft(2));//向左移动2为的数
+//        System.out.println(bigDecimal.movePointRight(2));//向右移动2为的小数
+        System.out.println(bigDecimal.negate());//向右移动2为的小数
 
+
+    }
     /**
      * 四舍五入 正确用法 new BigDecimal 需要把Double转string
      * {@link BigDecimal.ROUND_HALF_EVEN} 如果四舍五入的 那个数字刚好是‘5’ 并且的左边是偶数则不做四舍五入的处理
@@ -25,11 +34,12 @@ public class testMath {
      * {@link BigDecimal.ROUND_CEILING} BigDecimal   为正，则作   ROUND_UP      ；如果为负，则作   ROUND_DOWN
      * {@link BigDecimal.ROUND_UP}  绝对值 向上取整
      * {@link BigDecimal.ROUND_DOWN}绝对值 向下取整
+     * {@link BigDecimal.ROUND_UNNECESSARY} 保留的小数尾数和原数字 一样 如果要缩小 必须得保证后面都是0
      *
      */
     private static void Rint() {
         System.out.println( new BigDecimal(Double.toString(test)).
-                setScale(2, BigDecimal.ROUND_CEILING)); //2  保留2位数字
+                setScale(2, BigDecimal.ROUND_UNNECESSARY)); //2  保留2位数字
         System.out.println( new BigDecimal(Double.toString(test)).
                 setScale(2, BigDecimal.ROUND_UP));
         System.out.println( new BigDecimal(Double.toString(test)).
