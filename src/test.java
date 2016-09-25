@@ -12,7 +12,8 @@ public class test {
         //testArrayList();
         //testReplace();
         //ChangeUrl();
-        System.out.println(getString());
+        int [] s=new int[]{1,2};
+        System.out.println("斯蒂芬");
     }
     private static String getString(){
         int type=1;
@@ -21,6 +22,7 @@ public class test {
                 return "1111";
         }
         return null;
+
     }
     private static void testReplace(){
 

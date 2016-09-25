@@ -8,7 +8,7 @@ import java.util.Locale;
  * Created by ${zhangzz} on 2016/5/13.
  */
 public class testMath {
-    private static double test=0.51600;
+    private static double test=12546523658.54500;
     public static void main(String[] args) {
     /*    ring();
         round();
@@ -20,7 +20,13 @@ public class testMath {
     }
 
     private static void testNumFormat() {
-        NumberFormat format=NumberFormat.getCurrencyInstance(Locale.CHINA);
+        NumberFormat format=NumberFormat.getCurrencyInstance(Locale.CHINA);  // 得到货币的 数据格式
+        format=NumberFormat.getPercentInstance();//得到百分比的数据格式
+//        format=NumberFormat.getCurrencyInstance();//得到缺少 语言的 货币数据格式
+//        format=NumberFormat.getNumberInstance();//得到缺少 基本的数据格式
+//        format=NumberFormat.getInstance();//得到缺少 基本的数据格式
+        format.setMinimumFractionDigits(2);
+        format.setMaximumFractionDigits(2);
         System.out.println(format.format(test));
     }
 
