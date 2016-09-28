@@ -1,3 +1,4 @@
+/*
 package html;
 
 import org.jsoup.Jsoup;
@@ -15,9 +16,11 @@ import java.io.InputStream;
 import java.io.StringBufferInputStream;
 import java.util.List;
 
+*/
 /**
  * Created by ${zhangzz} on 2015/9/14.
- */
+ *//*
+
 public class htmlParser {
     static     String data=
             "\"<p>填填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空填空空填空填空填空填空填空填空填空空填空()()()()()()</p>\"";
@@ -33,7 +36,8 @@ public class htmlParser {
 
                 Elements elements=element1.children();
                 getNode(element1.childNodes());
-              /*  Elements element2=element1.getElementsByTag("video");
+              */
+/*  Elements element2=element1.getElementsByTag("video");
                 if (element2.size()>=1){
                     String src=element2.attr("src");
                     System.out.println(src);
@@ -48,7 +52,8 @@ public class htmlParser {
                 if (element1.hasText()) {
                     String s2 = element1.text();
                     System.out.println(s2);
-                }*/
+                }*//*
+
 
             }
     }
@@ -80,3 +85,4 @@ public class htmlParser {
         }
     }
 }
+*/

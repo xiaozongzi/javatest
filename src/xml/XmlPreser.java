@@ -1,3 +1,4 @@
+/*
 package xml;
 
 import org.dom4j.Attribute;
@@ -19,9 +20,11 @@ import java.io.StringReader;
 import java.lang.reflect.*;
 import java.util.*;
 
+*/
 /**
  * Created by ${zhangzz} on 2015/8/24.
- */
+ *//*
+
 public class XmlPreser {
     public static void main(String[] args){
        // readXml("D:\\fs\\out\\artifacts\\fs_war_exploded\\data\\1\\21304f2f-e004-49f0-ae98-dbc3ed7cfef8\\imsmanifest.xml");
@@ -187,3 +190,4 @@ public class XmlPreser {
                 && isInterface(c.getSuperclass(), Interface);
     }
 }
+*/

@@ -12,5 +12,12 @@
     <orderEntry type="library" name="xstream-1.4.7" level="project" />
     <orderEntry type="library" name="jave-1.0.2" level="project" />
     <orderEntry type="library" name="jsoup-1.8.3" level="project" />
+    <orderEntry type="library" name="jexcelapi_2_6_6" level="project" />
+    <orderEntry type="library" name="poi-3.15" level="project" />
+    <orderEntry type="library" exported="" name="poi-ooxml-3.14-20160307" level="project" />
+    <orderEntry type="library" name="poi-ooxml-schemas-3.14-20160307" level="project" />
+    <orderEntry type="library" name="poi-examples-3.15" level="project" />
+    <orderEntry type="library" name="curvesapi-1.04" level="project" />
+    <orderEntry type="library" name="log4j-1.2.17" level="project" />
   </component>
 </module>

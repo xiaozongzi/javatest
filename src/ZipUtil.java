@@ -1,3 +1,4 @@
+/*
 
 
 import java.io.*;
@@ -8,13 +9,15 @@ import java.util.zip.*;
 
 public class ZipUtil {
 
-    /**
+    */
+/**
      * 递归压缩文件夹
      * @param srcRootDir 压缩文件夹根目录的子路径
      * @param file 当前递归压缩的文件或目录对象
      * @param zos 压缩文件存储对象
      * @throws Exception
-     */
+     *//*
+
     private static void zip(String srcRootDir, File file, ZipOutputStream zos) throws Exception
     {
         if (file == null)
@@ -58,13 +61,15 @@ public class ZipUtil {
         }
     }
 
-    /**
+    */
+/**
      * 对文件或文件目录进行压缩
      * @param srcPath 要压缩的源文件路径。如果压缩一个文件，则为该文件的全路径；如果压缩一个目录，则为该目录的顶层目录路径
      * @param zipPath 压缩文件保存的路径。注意：zipPath不能是srcPath路径下的子文件夹
      * @param zipFileName 压缩文件名
      * @throws Exception
-     */
+     *//*
+
     public static void zip(String srcPath, String zipPath, String zipFileName) throws Exception
     {
 
@@ -136,19 +141,23 @@ public class ZipUtil {
         }
     }
 
-    /**
+    */
+/**
      * 解压缩zip包
      * @param zipFilePath zip文件的全路径
      * @param unzipFilePath 解压后的文件保存的路径
      * @param includeZipFileName 解压后的文件保存的路径是否包含压缩文件的文件名。true-包含；false-不包含
-     */
+     *//*
+
     @SuppressWarnings("unchecked")
     public static void unzip(String zipFilePath, String unzipFilePath, boolean includeZipFileName) throws Exception
     {
-       /* if (StringUtils.isEmpty(zipFilePath) || StringUtils.isEmpty(unzipFilePath))
+       */
+/* if (StringUtils.isEmpty(zipFilePath) || StringUtils.isEmpty(unzipFilePath))
         {
             throw new ParameterException(ICommonResultCode.PARAMETER_IS_NULL);
-        }*/
+        }*//*
+
         File zipFile = new File(zipFilePath);
         //如果解压后的文件保存路径包含压缩文件的文件名，则追加该文件名到解压路径
         if (includeZipFileName)
@@ -224,7 +233,8 @@ public class ZipUtil {
 
     public static void main(String[] args)
     {
-   /*     String zipPath = "d:\\ziptest\\zipPath";
+   */
+/*     String zipPath = "d:\\ziptest\\zipPath";
         String dir = "d:\\ziptest\\rawfiles";
         String zipFileName = "test.zip";
         try
@@ -234,7 +244,8 @@ public class ZipUtil {
         catch (Exception e)
         {
             e.printStackTrace();
-        }*/
+        }*//*
+
 
         String zipFilePath = "D:\\fs\\out\\artifacts\\fs_war_exploded\\data\\1\\a277ddb6-d881-44e6-a245-54b68d181bdc.zip";
         String unzipFilePath = "D:\\fs\\out\\artifacts\\fs_war_exploded\\data\\1\\";
@@ -243,30 +254,36 @@ public class ZipUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-       /* try
+       */
+/* try
         {
             unzip(zipFilePath, unzipFilePath, true);
         }
         catch (Exception e)
         {
             e.printStackTrace();
-        }*/
+        }*//*
+
     }
-    /**
+    */
+/**
      * 解压到指定目录
      * @param zipPath
      * @param descDir
      * @author isea533
-     */
+     *//*
+
     public static void unZipFiles(String zipPath,String descDir)throws IOException{
         unZipFiles(new File(zipPath), descDir);
     }
-    /**
+    */
+/**
      * 解压文件到指定目录
      * @param zipFile
      * @param descDir
      * @author isea533
-     */
+     *//*
+
     @SuppressWarnings("rawtypes")
     public static void unZipFiles(File zipFile,String descDir)throws IOException {
         File pathFile = new File(descDir);
@@ -304,3 +321,4 @@ public class ZipUtil {
     }
 }
 
+*/
