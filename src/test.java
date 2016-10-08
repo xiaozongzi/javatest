@@ -12,8 +12,21 @@ public class test {
         //testArrayList();
         //testReplace();
         //ChangeUrl();
-        int [] s=new int[]{1,2};
-        System.out.println("斯蒂芬");
+        /*int [] s=new int[]{1,2};
+        System.out.println("斯蒂芬");*/
+        test();
+
+    }
+    private static void test(){
+        String fileName="121212(acdd)";
+        if (fileName.contains("(")&&fileName.contains(")")){
+            int i = fileName.lastIndexOf(")");
+            int i1 = fileName.lastIndexOf("(");
+//            char c = fileName.charAt(i - i1);
+            String substring = fileName.substring(i1+1, i);
+            int c= Integer.parseInt(substring);
+            System.out.println(c);
+        }
     }
     private static String getString(){
         int type=1;
