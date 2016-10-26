@@ -2,14 +2,13 @@ package excel;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.xssf.usermodel.*;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
+import javax.swing.plaf.ColorUIResource;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -23,14 +22,14 @@ import java.util.List;
 public class ExcelTest {
     static List<List<Object>> lists;
     static String[] findStirng       = {
-            "frameworks;base;packages;PrintSpooler;res;values;strings",
-            "vendor;qcom;proprietary;mm-audio;voiceprint;VoicePrintService;res;values;strings",
-            "frameworks;base;packages;PrintRecommendationService;res;values;strings",
+            "vendor;qcom;proprietary;csm;res;values;strings",
+//            "packages;providers;ContactsProvider;res;values;strings",
+//            "frameworks;base;packages;PrintRecommendationService;res;values;strings",
     };
 
-    static String excelFileName    = "E:\\skypeFile\\工作簿120161014(1).xlsx";
+    static String excelFileName    = "E:\\skypeFile\\copy\\Android_N_0924_AllMerged.xlsx";
     static String excelFileOutName = "E:\\skypeFile\\copy\\Android_N_0924_AllMerged2.xlsx";
-    static String wordFilePath     = "F:\\phoneScreen\\print\\word";
+    static String wordFilePath     = "F:\\phoneScreen\\security\\word";
     static String appName          = "battery";
     static String pictureName;
     static boolean resetPictureName = true;
@@ -40,12 +39,12 @@ public class ExcelTest {
     static XSSFSheet       sheet;
     static int lastRowNum = 0;
     static FileOutputStream fileOutputStream;
-    private static String filePath       = "F:\\phoneScreen\\print\\picture";
-    private static String filePathNo     = "F:\\phoneScreen\\print\\pictureNo";
-    private static String foundPath      = "F:\\phoneScreen\\print\\found";
-    private static String foundPathNo    = "F:\\phoneScreen\\print\\foundNo";
-    private static String notfoundPath   = "F:\\phoneScreen\\print\\notfound";
-    private static String notfoundPathNo = "F:\\phoneScreen\\print\\notfoundNo";
+    private static String filePath       = "F:\\phoneScreen\\security\\picture";
+    private static String filePathNo     = "F:\\phoneScreen\\security\\pictureNo";
+    private static String foundPath      = "F:\\phoneScreen\\security\\found";
+    private static String foundPathNo    = "F:\\phoneScreen\\security\\foundNo";
+    private static String notfoundPath   = "F:\\phoneScreen\\security\\notfound";
+    private static String notfoundPathNo = "F:\\phoneScreen\\security\\notfoundNo";
     private static XSSFSheet sheetDO;
     private static boolean   setPath;
     private static String    path;
@@ -80,7 +79,7 @@ public class ExcelTest {
             e.printStackTrace();
 
         }
-//        notFoundFile();
+        notFoundFile();
     }
 
     private static List<List<Object>> read2007Excel(File file)
@@ -198,12 +197,11 @@ public class ExcelTest {
     }
 
     private static boolean isContains(String compare) {
-    /*    for (int i = 0; i < findStirng.length; i++) {
-            if (compare.trim().contains(findStirng[i].trim()))
+        for (int i = 0; i < findStirng.length; i++) {
+            if (compare.contains(findStirng[i]))
                 return true;
         }
-        return false;*/
-    return true;
+        return false;
     }
 
     private static void docFile() {
@@ -314,7 +312,7 @@ public class ExcelTest {
     }
 
     private static void set(XSSFRow row, boolean find) {
-       /* XSSFCellStyle rowStyle;
+        XSSFCellStyle rowStyle;
         rowStyle = xwbDO.createCellStyle();
         rowStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         rowStyle.setFillForegroundColor(new XSSFColor(find ? new ColorUIResource(255, 249, 45) : new ColorUIResource
@@ -326,9 +324,9 @@ public class ExcelTest {
             if (row.getCell(i) != null)
                 row.getCell(i).setCellStyle(rowStyle);
         }
-          *//*  row.getCell(0).setCellStyle(rowStyle);
-//            rowStyle.setcolo*//*
-        row.setRowStyle(rowStyle);*/
+          /*  row.getCell(0).setCellStyle(rowStyle);
+//            rowStyle.setcolo*/
+        row.setRowStyle(rowStyle);
     }
 
     private static void setNotFoundFile(String inPaht, String outPaht) {
@@ -410,13 +408,11 @@ public class ExcelTest {
     private static boolean isContains(String fontFamily, String ss) {
         String contentstirng = fontFamily.toLowerCase().trim();
         String needContent   = ss.toLowerCase().trim();
-        if (!needContent.contains("#"))
-            return false;
         try {
             int    contentstirng1 = Integer.parseInt(contentstirng);
             String substring      = needContent.substring(needContent.indexOf("#") + 1, needContent.lastIndexOf("#"));
             return substring.equals(contentstirng);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             e.printStackTrace();
 
             return false;
@@ -479,12 +475,12 @@ public class ExcelTest {
     private static String getPath(String fileName) {
 
 
-    /*    if (fileName.contains("-")) {
+        if (fileName.contains("-")) {
             fileName = fileName.replace("-", "->");
 //            fileName = fileName.substring(0, fileName.indexOf("."));
         } else {
 //            fileName = fileName.substring(0, fileName.indexOf("."));
-        }*/
+        }
         if (fileName.contains("(") && fileName.contains(")")) {
             String substring = fileName.substring(fileName.lastIndexOf("(") + 1, fileName.lastIndexOf(")"));
             String total     = "(" + substring + ")";
