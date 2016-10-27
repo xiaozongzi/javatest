@@ -1,7 +1,7 @@
 package excel;
 
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.ss.usermodel.CellCopyPolicy;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -22,11 +22,11 @@ public class ExcelInput {
     static FileInputStream fileInputStream;
     static FileInputStream fileContentInputStream;
     static XSSFWorkbook    xwb;
-    static HSSFWorkbook    xwbContent;
+    static XSSFWorkbook    xwbContent;
     static List<List<Object>> lists;
     static List<List<Object>> listsContent;
     static String excelFileName    = "E:\\skypeFile\\Android_N_0924_AllMerged(2).xlsx";
-    static String excelContentFile="E:\\skypeFile\\testcase.xls";
+    static String excelContentFile="E:\\skypeFile\\copy\\testcase(3).xlsx";
     static String excelOutFile="E:\\skypeFile\\copy\\testcase2.xlsx";
     public static void main(String[] args) {
         try {
@@ -34,24 +34,55 @@ public class ExcelInput {
             initContentfile();
             for (int i = 0; i < listsContent.size(); i++) {
 
-                if (listsContent.get(i).get(8)==null||listsContent.get(i).get(8).toString().trim().equals("")){
-                    continue;
-                }else {
-                    for (int j = 0; j < lists.size(); j++) {
-                        if (listsContent.get(i).get(0).toString().trim().equals(lists.get(j).get(0).toString().trim())&&
-                                listsContent.get(i).get(3).toString().trim().equals(lists.get(j).get(3).toString().trim())){
-                                xwb.getSheetAt(0).getRow(j).copyRowFrom(xwbContent.getSheetAt(0).getRow(i),new CellCopyPolicy());
-                        }
+                try {
+                    if (listsContent.get(i).get(9)==null||listsContent.get(i).get(9).toString().trim().equals("")){
+                        continue;
+                    }else {
+                        findValue(i);
                     }
+                } catch (Exception e) {
+                    System.out.println(i);
+                    e.printStackTrace();
                 }
             }
             FileOutputStream outputStream=new FileOutputStream(excelOutFile);
             xwb.write(outputStream);
             outputStream.flush();
             outputStream.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
+
             e.printStackTrace();
         }
+    }
+
+    private static void findValue(int i) {
+        for (int j = 0; j < lists.size(); j++) {
+            if (listsContent.get(i).get(0).toString().trim().equals(lists.get(j).get(0).toString().trim())&&
+                    listsContent.get(i).get(3).toString().trim().equals(lists.get(j).get(3).toString().trim())){
+
+
+                setValue(i, j,7);
+                setValue(i, j,8);
+                setValue(i, j,9);
+                return;
+//                            xwb.getSheetAt(0).getRow(j).copyRowFrom(xwbContent.getSheetAt(0).getRow(i),new CellCopyPolicy());
+            }
+        }
+    }
+
+    private static void setValue(int i, int j,int cellNum) {
+        XSSFCell cell = xwb.getSheetAt(0).getRow(j).getCell(cellNum);
+        if (cell==null){
+            cell=xwb.getSheetAt(0).getRow(j).createCell(cellNum);
+        }
+        cell.setCellType(CellType.STRING);
+        cell.setCellValue(getRawValue(i, cellNum));
+    }
+
+    private static String getRawValue(int i, int cellNum) {
+        if (xwbContent.getSheetAt(0).getRow(i).getCell(cellNum)==null)
+            return "";
+        return xwbContent.getSheetAt(0).getRow(i).getCell(cellNum).getRawValue();
     }
 
     private static List<List<Object>> read2007Excel(FileInputStream fileInputStream,XSSFWorkbook    xwb)
@@ -218,8 +249,8 @@ public class ExcelInput {
     }
     private static void initContentfile() throws IOException {
         fileContentInputStream = new FileInputStream(excelContentFile);
-        xwbContent = new HSSFWorkbook(fileContentInputStream);
-        listsContent=read2003Excel(fileContentInputStream,xwbContent);
+        xwbContent = new XSSFWorkbook(fileContentInputStream);
+        listsContent=read2007Excel(fileContentInputStream,xwbContent);
     }
 
 }
