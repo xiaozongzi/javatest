@@ -152,7 +152,7 @@ public class ExcelTest {
                         value = cell.toString();
                 }
                 if (value == null || "".equals(value)) {
-                    linked.add("");
+                    value="";
                 }
                 linked.add(value);
             }
