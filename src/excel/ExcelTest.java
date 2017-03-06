@@ -4,9 +4,6 @@ import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.xssf.usermodel.*;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import javax.swing.plaf.ColorUIResource;
 import java.io.*;
@@ -16,11 +13,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import static jdk.nashorn.internal.runtime.JSType.isNumber;
+
 /**
  * Created by zhangzz on 2016/9/28.
  */
 public class ExcelTest {
     static List<List<Object>> lists;
+    static List<String> textList=new ArrayList<String>();
     static String[] findStirng       = {
             "vendor;qcom;proprietary;csm;res;values;strings",
 //            "packages;providers;ContactsProvider;res;values;strings",
@@ -29,7 +29,7 @@ public class ExcelTest {
 
     static String excelFileName    = "E:\\skypeFile\\copy\\Android_N_0924_AllMerged(2).xlsx";
     static String excelFileOutName = "E:\\skypeFile\\copy\\Android_N_0924_AllMerged2.xlsx";
-    static String wordFilePath     = "F:\\phoneScreen\\pdf\\result\\新建文件夹";
+    static String wordFilePath     = "F:\\phoneScreen\\pdf\\text";
     static String appName          = "battery";
     static String pictureName;
     static boolean resetPictureName = true;
@@ -79,7 +79,7 @@ public class ExcelTest {
             e.printStackTrace();
 
         }
-        notFoundFile();
+//        notFoundFile();
     }
 
     private static List<List<Object>> read2007Excel(File file)
@@ -108,7 +108,7 @@ public class ExcelTest {
                 counter++;
             }
             List<Object> linked = new LinkedList<Object>();
-            for (int j = row.getFirstCellNum(); j <= rows; j++) {
+            for (int j =0; j <= rows; j++) {
 
                 cell = row.getCell(j);
                 if (cell == null) {
@@ -152,7 +152,7 @@ public class ExcelTest {
                         value = cell.toString();
                 }
                 if (value == null || "".equals(value)) {
-                    linked.add("");
+                    value="";
                 }
                 linked.add(value);
             }
@@ -177,9 +177,13 @@ public class ExcelTest {
 
                 for (int i = 0; i < columeNum; i++) {
 
-                    XSSFCell cell = row.createCell(i);
-                    cell.setCellType(CellType.STRING);
-                    cell.setCellValue(String.valueOf(lists.get(z).get(i)));
+                    try {
+                        XSSFCell cell = row.createCell(i);
+                        cell.setCellType(CellType.STRING);
+                        cell.setCellValue(String.valueOf(lists.get(z).get(i)));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                 }
                 lastRowNum++;
@@ -197,12 +201,12 @@ public class ExcelTest {
     }
 
     private static boolean isContains(String compare) {
-       /* for (int i = 0; i < findStirng.length; i++) {
+    /*    for (int i = 0; i < findStirng.length; i++) {
             if (compare.contains(findStirng[i]))
                 return true;
         }
         return false;*/
-       return true;
+    return true;
     }
 
     private static void docFile() {
@@ -211,10 +215,11 @@ public class ExcelTest {
             File[] files = file.listFiles();
             if (files != null) {
                 for (int i = 0; i < files.length; i++) {
-                    if (isDoc(files[i])) {
+//                    if (isDoc(files[i])) {
                         doc(files[i]);
-                    }
+//                    }
                 }
+                dealText();
             }
         }
     }
@@ -248,9 +253,24 @@ public class ExcelTest {
 
     private static void doc(File url) {
         resetPictureName = true;
-        System.out.println(url.getName());
-
+//        System.out.println(url.getName());
+        textList.add(url.getName());
         try {
+            InputStreamReader read = new InputStreamReader(
+                    new FileInputStream(url),"utf-8");//考虑到编码格式
+            BufferedReader bufferedReader = new BufferedReader(read);
+            String lineTxt = null;
+            while((lineTxt = bufferedReader.readLine()) != null){
+//                System.out.println(lineTxt);
+                textList.add(lineTxt);
+
+            }
+            read.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+       /* try {
             XWPFDocument document = new XWPFDocument(new FileInputStream(url));
             if (document != null) {
                 List<XWPFParagraph> paragraphs = document.getParagraphs();
@@ -258,10 +278,10 @@ public class ExcelTest {
                     List<XWPFRun> runs = paragraphs.get(i).getRuns();
                     for (int j = 0; j < runs.size(); j++) {
                         String fontFamily = runs.get(j).getText(0);
-                       /* CTEmpty[] crArray = runs.get(j).getCTR().getC();
+                       *//* CTEmpty[] crArray = runs.get(j).getCTR().getC();
                         for (int k = 0; k < crArray.length; k++) {
                             crArray[k].
-                        }*/
+                        }*//*
 
                         try {
 
@@ -297,14 +317,59 @@ public class ExcelTest {
                 }
 
             }
-           /* WordExtractor extractor = new WordExtractor(new FileInputStream("F:\\chorme\\金山手机助手截图20160928
+           *//* WordExtractor extractor = new WordExtractor(new FileInputStream("F:\\chorme\\金山手机助手截图20160928
            092046.png.docx"));
-            String text = extractor.getText();*/
-          /*  HWPFDocument document=new HWPFDocument(new FileInputStream("F:\\chorme\\金山手机助手截图20160928 092046.png
+            String text = extractor.getText();*//*
+          *//*  HWPFDocument document=new HWPFDocument(new FileInputStream("F:\\chorme\\金山手机助手截图20160928 092046.png
           .docx"));
-            String s=document.getText().toString();*/
+            String s=document.getText().toString();*//*
         } catch (IOException e) {
             e.printStackTrace();
+        }*/
+    }
+    private static void dealText(){
+        for (int i = 0; i < textList.size(); i++) {
+            String text=textList.get(i).trim();
+            if (text.endsWith(".txt")){
+                System.out.println("--------------"+text);
+            }else if (text.contains("#")){
+                String[] split = text.split("#");
+                dealItem(split);
+            }
+
+        }
+        System.out.println("个数："+countNum);
+    }
+
+    private static void dealItem(String[] split) {
+        for (int i = 0; i < split.length; i++) {
+            String text=split[i];
+            if (text.contains("! ")){
+                text=text.replace("! ","1");
+            }
+            if (isNumber(text)) {
+                findText(text);
+            }
+        }
+    }
+    static int countNum=0;
+    private static void findText(String text) {
+        for (int z = 0; z < lists.size(); z++) {
+//                                    String compare = ((String) lists.get(z).get(0));
+//                                    if (compare.contains(findStirng)) {
+            String ss = (String) lists.get(z).get(5);
+            String path= (String) lists.get(z).get(9);
+//                                            changePictureName(url.getName());
+            if (isContains(text, ss)&&isStringNull(path)) {
+                System.out.println(ss);
+                countNum+=1;
+                lists.get(z).set(9,"found");
+                return;
+            }
+
+//                                    }
+
+
         }
     }
 
@@ -414,8 +479,7 @@ public class ExcelTest {
             String substring      = needContent.substring(needContent.indexOf("#") + 1, needContent.lastIndexOf("#"));
             return substring.equals(contentstirng);
         } catch (Exception e) {
-            e.printStackTrace();
-
+//            System.out.println("错误"+ss);
             return false;
         }
 
@@ -477,7 +541,7 @@ public class ExcelTest {
 
 
         if (fileName.contains("-")) {
-//            fileName = fileName.replace("-", "->");
+            fileName = fileName.replace("-", "->");
 //            fileName = fileName.substring(0, fileName.indexOf("."));
         } else {
 //            fileName = fileName.substring(0, fileName.indexOf("."));
