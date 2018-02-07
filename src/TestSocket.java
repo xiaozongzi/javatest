@@ -17,7 +17,7 @@ public class TestSocket {
 
     private static void testSocket() {
         try {
-            socket =new Socket("192.168.0.73", 8991);
+            socket =new Socket("192.168.0.60", 8991);
             OutputStream  os     =socket.getOutputStream();
             pw     =new PrintWriter(os);
 
@@ -49,10 +49,7 @@ public class TestSocket {
         @Override
         public void run() {
             while (true) {
-                pw.write("{\"RFIDTagList\":[{\"EPC\":\"BBB0\",\"TID\":\"E2003412013DF60007891C4C\",\"TotalCount\":3," +
-                                 "\"UserData\":\"AAAA11111111111111111111\"},{\"EPC\":\"CCBBB000\"," +
-                                 "\"TID\":\"E2003412013BF60007892013\",\"TotalCount\":3," +
-                                 "\"UserData\":\"BBBBAADDEEDCCBBAABCDDEBA\"}]}");
+                pw.write("{\"rootData\":\"\",\"rootType\":\"InventoryTypeData_OFFER\"}");
                 pw.flush();
 
                 String info=null;

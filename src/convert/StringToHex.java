@@ -2,15 +2,16 @@ package convert;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 
 /**
  * Created by zhangzz on 2017/3/1.
  */
 public class StringToHex {
     public static void main(String[] args) {
-        System.out.println(bytesToHexString("sdfsdfanoyzx17".getBytes()));
-        System.out.println(Arrays.toString(hexStringToBytes("736466736466616e6f797a783137")));
+        String convert = "dfdfcbv~!@#$(}35gd?><fg";
+        System.out.println(bytesToHexString(convert.getBytes()));
+        ;
+        System.out.println((hexStringToString("5064647065666754353235343400")));
     }
     /*
  * Convert byte[] to hex string.这里我们可以将byte转换成int，然后利用Integer.toHexString(int)来转换成16进制字符串。
@@ -38,7 +39,7 @@ public class StringToHex {
      * @param hexString the hex string
      * @return byte[]
      */
-    public static byte[] hexStringToBytes(String hexString) {
+    public static String hexStringToString(String hexString) {
         if (hexString == null || hexString.equals("")) {
             return null;
         }
@@ -50,7 +51,8 @@ public class StringToHex {
             int pos = i * 2;
             d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));
         }
-        return d;
+        String s=new String(d);
+        return s;
     }
 
     /**
